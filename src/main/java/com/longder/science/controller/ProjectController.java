@@ -2,6 +2,8 @@ package com.longder.science.controller;
 
 import com.longder.science.entity.po.Project;
 import com.longder.science.service.ProjectManageService;
+import com.longder.science.service.StudentManageService;
+import com.longder.science.service.TeacherManageService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +19,10 @@ import javax.annotation.Resource;
 public class ProjectController {
     @Resource
     private ProjectManageService projectManageService;
+    @Resource
+    private TeacherManageService teacherManageService;
+    @Resource
+    private StudentManageService studentManageService;
 
     /**
      * 项目列表
@@ -36,6 +42,8 @@ public class ProjectController {
      */
     @GetMapping("/toAdd")
     public String toAddProject(Model model){
+        model.addAttribute("teacherList",teacherManageService.listAllTeacher());
+        model.addAttribute("studentList",studentManageService.listAllStudent());
         return "project/add-project-modal";
     }
 
@@ -58,6 +66,9 @@ public class ProjectController {
      */
     @GetMapping("/toEdit")
     public String toEditProject(Long projectId,Model model){
+        model.addAttribute("teacherList",teacherManageService.listAllTeacher());
+        model.addAttribute("studentList",studentManageService.listAllStudent());
+        model.addAttribute("project",projectManageService.getOneProject(projectId));
         return "project/edit-project-modal";
     }
 

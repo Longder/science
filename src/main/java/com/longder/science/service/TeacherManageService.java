@@ -1,6 +1,8 @@
 package com.longder.science.service;
 
+import com.longder.science.entity.po.Project;
 import com.longder.science.entity.po.Teacher;
+import com.longder.science.repository.ProjectRepository;
 import com.longder.science.repository.TeacherRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,6 +18,9 @@ public class TeacherManageService {
 
     @Resource
     private TeacherRepository teacherRepository;
+
+    @Resource
+    private ProjectRepository projectRepository;
 
     /**
      * 查询所有教师
@@ -57,6 +62,10 @@ public class TeacherManageService {
      */
     @Transactional
     public void removeOneTeacher(Long teacherId){
+        //检查教师关联的project，清空教师id
+        List<Project> projectList = projectRepository.listByTeacherId(teacherId);
+        projectList.forEach(project -> project.setTeacher(null));
+        projectRepository.saveAll(projectList);
         teacherRepository.deleteById(teacherId);
     }
 
