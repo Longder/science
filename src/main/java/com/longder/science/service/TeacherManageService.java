@@ -26,7 +26,7 @@ public class TeacherManageService {
     }
 
     /**
-     * 存储一个教师（添加修改共用）
+     * 存储一个教师
      */
     @Transactional
     public void addOneTeacher(Teacher teacher){
@@ -49,6 +49,15 @@ public class TeacherManageService {
     @Transactional
     public void editOneTeacher(Teacher teacher){
         teacherRepository.save(teacher);
+    }
+
+    /**
+     * 删除一个教师
+     * @param teacherId
+     */
+    @Transactional
+    public void removeOneTeacher(Long teacherId){
+        teacherRepository.deleteById(teacherId);
     }
 
 }

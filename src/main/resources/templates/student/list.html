@@ -7,7 +7,7 @@
     <div class="col-sm-12">
         <div class="ibox float-e-margins">
             <div class="ibox-title">
-                <h5>教师列表</h5>
+                <h5>学生列表</h5>
                 <div class="ibox-tools">
                     <a class="collapse-link">
                         <i class="fa fa-chevron-up"></i>
@@ -26,10 +26,10 @@
                         <div class="col-sm-3">
                         <span class="input-group-btn">
                         <input type="button" class="btn btn-success" data-toggle="modal"
-                               data-target="#teacherModal"
+                               data-target="#studentModal"
                                data-backdrop="static"
-                               onclick="openModal('/admin/teacher/toAdd','teacherModal')"
-                               value="新增教师"/>
+                               onclick="openModal('/admin/student/toAdd','studentModal')"
+                               value="新增学生"/>
                         </span>
                         </div>
                     </div>
@@ -42,24 +42,25 @@
                         <td>姓名</td>
                         <td>年龄</td>
                         <td>性别</td>
-                        <td>职称</td>
+                        <td>学号</td>
                         <td>操作</td>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="teacher:${list}">
-                        <td th:text="${teacherStat.index+1}"></td>
-                        <td th:text="${teacher.name}"></td>
-                        <td th:text="${teacher.age}"></td>
-                        <td th:text="${teacher.sex}"></td>
-                        <td th:text="${teacher.level}"></td>
+                    <tr th:each="student:${list}">
+                        <td th:text="${studentStat.index+1}"></td>
+                        <td th:text="${student.name}"></td>
+                        <td th:text="${student.age}"></td>
+                        <td th:text="${student.sex}"></td>
+                        <td th:text="${student.number}"></td>
                         <td>
                             <input class="btn btn-info btn-sm" data-backdrop="static"
-                                   data-target="#teacherModal" data-toggle="modal"
-                                   th:onclick="'javascript:openModal(\'/admin/teacher/toEdit?teacherId='+${teacher.id}+'\',\'teacherModal\')'"
+                                   data-target="#studentModal" data-toggle="modal"
+                                   th:onclick="'javascript:openModal(\'/admin/student/toEdit?studentId='+${student.id}+'\',\'studentModal\')'"
                                    type="button"
                                    value="修改"/>
-                            <a th:href="@{/admin/teacher/remove(teacherId=${teacher.id})}" class="btn btn-danger btn-sm" th:onclick="'javascript:return removeTeacher('+${teacher.id}+')'">删除</a>
+                            <a th:href="@{/admin/student/remove(studentId=${student.id})}" class="btn btn-danger btn-sm"
+                               th:onclick="'javascript:return removeStudent('+${student.id}+')'">删除</a>
                         </td>
                     </tr>
                     </tbody>
@@ -68,11 +69,11 @@
         </div>
     </div>
 </div>
-<div class="modal in modal fade" id="teacherModal" tabindex="-1" role="dialog" aria-hidden="true"></div>
+<div class="modal in modal fade" id="studentModal" tabindex="-1" role="dialog" aria-hidden="true"></div>
 <!--引入统一JS-->
 <script th:replace="import/script :: script"></script>
 <script>
-    function removeTeacher(teacherId){
+    function removeStudent(studentId){
         if(confirm("确定删除吗？")){
             return true;
         }else{

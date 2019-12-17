@@ -69,4 +69,16 @@ public class TeacherController {
         teacherManageService.editOneTeacher(teacher);
         return "redirect:list";
     }
+
+    /**
+     * 删除教师
+     * @param teacherId
+     * @return
+     */
+    @GetMapping("/remove")
+    public String removeTeacher(Long teacherId){
+        log.info("删除教师，教师id:{}",teacherId);
+        teacherManageService.removeOneTeacher(teacherId);
+        return "redirect:list";
+    }
 }

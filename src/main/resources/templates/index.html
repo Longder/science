@@ -36,9 +36,15 @@
                     </a>
                 </li>
                 <li sec:authorize="hasRole('ROLE_ADMIN')">
-                    <a class="J_menuItem" th:href="@{/admin/department/list}" title="部门管理">
+                    <a class="J_menuItem" th:href="@{/admin/student/list}" title="学生管理">
                         <i class="fa fa-dedent"></i>
                         <span class="nav-label">学生管理</span>
+                    </a>
+                </li>
+                <li sec:authorize="hasRole('ROLE_ADMIN')">
+                    <a class="J_menuItem" th:href="@{/admin/project/list}" title="项目管理">
+                        <i class="fa fa-dedent"></i>
+                        <span class="nav-label">项目管理</span>
                     </a>
                 </li>
             </ul>
@@ -54,7 +60,7 @@
                         <i class="fa fa-bars"></i> </a>
                     <form class="navbar-form-custom" method="post" role="search">
                         <div class="form-group">
-                            <h1>政务办公系统</h1>
+                            <h1>科研管理系统</h1>
                         </div>
                     </form>
                 </div>
